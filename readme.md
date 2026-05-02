@@ -1,3 +1,6 @@
+Recreational approach on a png viewer using raylib and manual decoding of a png file.
+failed to properly render adam7 interlaced png's.
+
 # png chunks doc
 
 https://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html
@@ -77,9 +80,3 @@ all of row 1, 3, 5, 7
 row_length = image_width * bpp + 1 <br>
 rows = 4 * image_height/8
 
-# formula for real pos
-
-final_arr_pos = start_pos + 8 * x / width_factor * y // aber nur für pass 0!! andere sind komplexer!
-
-müsste stimmen, kann sicher vereinfacht werden, da width/height und die starts und steps zusammenhängen
-finalfinal_pos = start_pos_x + step_x * x / width_factor * (start_pos_y + step_y * y / height_factor)
