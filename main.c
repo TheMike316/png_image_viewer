@@ -13,7 +13,7 @@
 #define ERROR (-1)
 
 // #define IMG_COMPRESSION_DEBUG
-#define IMG_PIXEL_DEBUG
+// #define IMG_PIXEL_DEBUG
 
 const unsigned char png_sig[8] = {137, 80, 78, 71, 13, 10, 26, 10};
 
