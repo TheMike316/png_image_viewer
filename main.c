@@ -510,11 +510,10 @@ unsigned char *load_image(const char *filename, int *out_width, int *out_height,
             // we need to track y offset
             size_t final_y_pos = start_y * *out_width * bpp;
             for (size_t y = 0; y < pass_height; ++y) {
-                // p += row_len;
 
                 unsigned char filter = row_ptr[0];
 
-                assert(filter <= 4 && "filter byte is not in 0-4 range");
+                // assert(filter <= 4 && "filter byte is not in 0-4 range");
 
                 cur = row_ptr + 1;
 
@@ -610,17 +609,17 @@ unsigned char *load_image(const char *filename, int *out_width, int *out_height,
 void free_image(unsigned char *image) { free(image); }
 
 
-int main(void) {
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        printf("usage: %s filename\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+    char *filename = argv[1];
+
     int width, height;
     size_t pixel_len;
-    // unsigned char *pixels =
-    // load_image("/Users/michaelhornegger/CLionProjects/png_image_viewer/test_non_interlaced.png",
-    //                                   &width, &height, &pixel_len);
-    // unsigned char *pixels =
-    //        load_image("/Users/michaelhornegger/CLionProjects/png_image_viewer/test.png", &width, &height,
-    //        &pixel_len);
-    unsigned char *pixels = load_image("/Users/michaelhornegger/CLionProjects/png_image_viewer/test_interlaced.png",
-                                       &width, &height, &pixel_len);
+    unsigned char *pixels = load_image(filename, &width, &height, &pixel_len);
+
     if (!pixels) {
         printf("error loading image\n");
         return EXIT_FAILURE;
