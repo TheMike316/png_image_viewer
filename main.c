@@ -469,7 +469,7 @@ unsigned char *load_image(const char *filename, int *out_width, int *out_height,
          * adam7
          */
 
-        unsigned char *p = uncompressed;
+        unsigned char *row_ptr = uncompressed;
 
         for (size_t pass = 0; pass < 7; ++pass) {
             printf("pass %lu\n", pass + 1);
@@ -510,13 +510,13 @@ unsigned char *load_image(const char *filename, int *out_width, int *out_height,
             // we need to track y offset
             size_t final_y_pos = start_y * *out_width * bpp;
             for (size_t y = 0; y < pass_height; ++y) {
-                p += row_len;
+                // p += row_len;
 
-                unsigned char filter = p[0];
+                unsigned char filter = row_ptr[0];
 
                 assert(filter <= 4 && "filter byte is not in 0-4 range");
 
-                cur = p + 1;
+                cur = row_ptr + 1;
 
                 unsigned char up = 0;
                 unsigned char left = 0;
@@ -550,7 +550,7 @@ unsigned char *load_image(const char *filename, int *out_width, int *out_height,
                             break;
                         case 4:
                             // PAETH
-                            int p = left + up - up_left;
+                            const int p = left + up - up_left;
                             int pa = abs(p - left);
                             int pb = abs(p - up);
                             int pc = abs(p - up_left);
@@ -584,6 +584,8 @@ unsigned char *load_image(const char *filename, int *out_width, int *out_height,
                 }
                 final_y_pos += step_y * *out_width * bpp;
                 prev = cur;
+
+                row_ptr += row_len;
             }
         }
     } else {
