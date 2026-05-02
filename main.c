@@ -12,8 +12,8 @@
 #define OK 0
 #define ERROR (-1)
 
-// #define IMG_COMPRESSION_DEBUG
-// #define IMG_PIXEL_DEBUG
+#define IMG_COMPRESSION_DEBUG
+#define IMG_PIXEL_DEBUG
 
 const unsigned char png_sig[8] = {137, 80, 78, 71, 13, 10, 26, 10};
 
@@ -353,7 +353,7 @@ unsigned char *load_image(const char *filename, int *out_width, int *out_height,
     }
 
 #ifdef IMG_COMPRESSION_DEBUG
-    FILE *debug_compressed_file = fopen("/Users/michaelhornegger/CLionProjects/png_image_viewer/compressed.bin", "wb");
+    FILE *debug_compressed_file = fopen("./compressed.bin", "wb");
     const size_t decompressed_n =
             fwrite(compressed_buffer.buf, sizeof(unsigned char), compressed_buffer.len, debug_compressed_file);
     printf("decompressed %zu bytes\n", decompressed_n);
@@ -628,7 +628,7 @@ int main(int argc, char *argv[]) {
     printf("width: %d; height: %d\n", width, height);
 
 #ifdef IMG_PIXEL_DEBUG
-    FILE *pixelFile = fopen("/Users/michaelhornegger/CLionProjects/png_image_viewer/pixels.rgba", "wb");
+    FILE *pixelFile = fopen("./pixels.rgba", "wb");
     assert(pixelFile);
     fwrite(pixels, pixel_len, 1, pixelFile);
     fclose(pixelFile);
