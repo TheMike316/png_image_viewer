@@ -1,4 +1,5 @@
-Recreational approach on a png viewer using raylib and manual decoding of a png file.
+Failed recreational approach on a png viewer using raylib and manual decoding of a png file with incredibly ugly code. <br>
+In the spirit of compression oriented design, I wanted to first make it work and then refactor the code into something slightly less scattered. <br>
 failed to properly render adam7 interlaced png's.
 
 # png chunks doc
